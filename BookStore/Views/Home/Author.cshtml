@@ -1,0 +1,148 @@
+﻿@model BookStore.Models.Author
+@using BookStore.Helpers;
+@using System.Globalization;
+
+@{
+    ViewBag.Title = Model.Name + " | Shop Hoa Online";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    CultureInfo ci = new CultureInfo("vi-VN");
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            @Html.Partial("SideMenu")
+
+            <div class="col-lg-9 padding-right" style="margin-top:10px">
+                <div class="product-details">
+                    <!--product-details-->
+                        <div id="panel_img" class="view-product" style="height: 300px">
+                            @if(Model.Image != null) { <text>
+                            <img src="@HtmlExtensions.GetImagePath(Model.Image, this.Context)" alt="" style="height:100%;width:100%;object-fit:contain" onerror="if (this.src != '/Assets/images/shop/logo-banner-design.jpg') this.src = '/Assets/images/shop/logo-banner-design.jpg';"/>
+                            </text>} else{<text>
+                            <img src="/Assets/images/shop/logo-banner-design.jpg" alt="" style="height:100%;width:100%;object-fit:contain" />
+                            </text>}
+                        </div>
+                </div><!--/product-details-->
+
+                @if((Model.Books != null))
+                {// liệt kê Hoa của Nhân dịp này
+
+                <div class="recommended_items">
+                    <!--recommended_items-->
+                    <h2 class="title text-center" style="margin-top:5px">@Model.Name</h2>
+                    @if(Model.Books.Count ==0)
+                    {
+                        <p style="text-align: center">Chưa có sản phẩm thuộc dịp này</p>
+                    }
+                    <div
+                         @if(Model.Books.Count > 6)
+                         {<text>                         
+                             id="books-carousel" class="carousel slide" data-ride="carousel"
+                         </text>}>
+                        <div
+                             @if(Model.Books.Count > 6)
+                             {<text>   
+                             class="carousel-inner"
+                             </text>}>
+                            <div class="item active">
+                                @{BookStore.Models.Product product;}
+                                @for(int i = 0; i < ((Model.Books.Count < 6)? Model.Books.Count:6); i++)
+                                {
+                                    product = Model.Books.ElementAt(i).Product;
+                                <div class="col-lg-4">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                @if (string.IsNullOrEmpty(product.AvatarImage))
+                                            {
+                                                <img style="height:200px;width:100%;object-fit:contain"
+                                                     src="~/Assets/images/home/default-image.png"
+                                                     />
+                                            }
+                                            else
+                                            {
+                                                <img style="height:200px;width:100%;object-fit:contain"
+                                                     src="@Url.Content(product.AvatarImage)"
+                                                     onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';"/>
+                                            }
+                                                <h2>@(product.Price.ToString("#,0.###", ci)) đ</h2>
+                                                <a href="/Products/Single?id=@product.ID"> <p>@product.Name</p></a>
+                                                <button type="button" class="btn btn-default add-to-cart" onclick='updateCart("add", @product.ID, event)'>
+                                                <i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                                @if(Model.Books.Count > 6) {
+                                    for(int i = 6; i < Model.Books.Count; i += 6) { 
+                            <div class="item">
+                                @for(int j = i; j < ((Model.Books.Count < (i+6))? Model.Books.Count: (i + 6)); j++)
+                                {
+                                    product = Model.Books.ElementAt(j).Product;
+                                <div class="col-lg-4">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                @if (string.IsNullOrEmpty(product.AvatarImage))
+                                            {
+                                                <img src="~/Assets/images/home/default-image.png"
+                                                     style="height:200px;width:100%;object-fit:contain"/>
+                                            }
+                                            else
+                                            {
+                                                <img src="@Url.Content(product.AvatarImage)"
+                                                     style="height:200px;width:100%;object-fit:contain"/>
+                                            }
+                                                <h2>@(product.Price.ToString("#,0.###", ci)) đ</h2>
+                                                <a href="/Products/Single?id=@product.ID"> <p>@product.Name</p></a>
+                                                <button type="button" class="btn btn-default add-to-cart" onclick='updateCart("add", @product.ID, event)'>
+                                                <i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+
+                            </div>
+                            }}
+                        </div>
+
+                        @if((Model.Books != null) && (Model.Books.Count > 6)) { 
+                        <a class="left recommended-item-control" href="#books-carousel" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="right recommended-item-control" href="#books-carousel" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                        }
+                    </div>
+                </div><!--/recommended_items-->
+                }
+            </div>
+        </div>
+    </div>
+
+    @*<script src="~/Assets/js/jquery.js"></script>
+    <script src="~/Assets/js/moment.js"></script>
+    <script src="~/Scripts/helper.js"></script>
+    <script src="~/Scripts/helper.js"></script>*@
+
+    <script>
+        //$(document).ready(function () {
+        //    var infoHeight = $("#panel_info").height();
+        //    $("#panel_img").height(infoHeight);
+        //});
+
+        function onSearch() {
+            if ($("#search_box").val())
+                window.location = '/Search/Index?key=' + $("#search_box").val();
+            else
+                alert('Bạn vui lòng nhập từ khoá để tìm kiếm');
+        }
+    </script>
+</section>
+
+

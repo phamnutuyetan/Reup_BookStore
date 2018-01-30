@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Blog | Shop Hoa Online";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section >
+    <div class="container">
+        <div class="row">
+            @Html.Partial("SideMenu")           
+            <div class="col-lg-9">
+                <div class="blog-post-area">
+                    <h2 class="title text-center">Latest From our Blog</h2>
+                    <div class="single-blog-post">
+                        <h3>'Thiên đường' 600 loài hoa hồng giữa lòng Hà Nội</h3>
+                        <div class="post-meta">
+                            <ul>
+                                <li><i class="fa fa-user"></i> An Pnt</li>
+                                <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
+                                <li><i class="fa fa-calendar"></i> DEC 10, 2017</li>
+                            </ul>
+                            <span>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                            </span>
+                        </div>
+                        <a href="">
+                            <img src="~/Assets/images/blog/blog-one.jpg"  >
+                        </a>
+                        <p>
+                            Trong giới chơi hoa hồng, chị Hằng Ruby (Lê Thị Thu Hằng, sinh năm 1987) ở thị trấn Trâu Quỳ (Gia Lâm, Hà Nội) được biết đến như một chuyên gia đầu ngành về loại hoa này. Bởi, ngoài sở hữu khu thiên đường hoa hồng với 500 loại hồng ngoại và khoảng 100 giống hồng nội, chị còn có thể đọc đúng tên, đặc điểm sinh trưởng, nguồn gốc của các loại hoa hồng có trong vườn dù chỉ nhìn lá và cánh, không cần nhìn hoa
+                        </p>
+                        <a class="btn btn-primary" href="">Read More</a>
+                    </div>
+                    <div class="single-blog-post">
+                        <h3>Songs with Flowers in the Title</h3>
+                        <div class="post-meta">
+                            <ul>
+                                <li><i class="fa fa-user"></i> AnPhamNuTuyet</li>
+                                <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
+                                <li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+                            </ul>
+                            <span>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                            </span>
+                        </div>
+                        <a href="">
+                            <img src="~/Assets/images/blog/blog-two.jpg"  >
+                        </a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                        <a class="btn btn-primary" href="">Read More</a>
+                    </div>
+                    <div class="single-blog-post">
+                        <h3>Rose the flower of love</h3>
+                        <div class="post-meta">
+                            <ul>
+                                <li><i class="fa fa-user"></i> LaLaLa</li>
+                                <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
+                                <li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+                            </ul>
+                            <span>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                            </span>
+                        </div>
+                        <a href="">
+                            <img src="~/Assets/images/blog/blog-three.jpg"  >
+                        </a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                        <a class="btn btn-primary" href="">Read More</a>
+                    </div>
+                    <div class="pagination-area">
+                        <ul class="pagination">
+                            <li><a href="" class="active">1</a></li>
+                            <li><a href="">2</a></li>
+                            <li><a href="">3</a></li>
+                            <li><a href=""><i class="fa fa-angle-double-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function onSearch() {
+        if ($("#search_box").val())
+            window.location = '/Search/Index?key=' + $("#search_box").val();
+        else
+            alert('Bạn vui lòng nhập từ khoá để tìm kiếm');
+    }
+</script>
